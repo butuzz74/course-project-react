@@ -5,20 +5,28 @@ import Header from "./header";
 import TableHead from "./tableHead";
 
 const Users = () => {
-  const [use, setUsers] = useState(API.users.fetchAll());
+  const [usersData, setUsers] = useState(API.users.fetchAll());
 
   const handleDelete = (event) => {
-    setUsers(use.filter((el) => el._id !== event.target.id));
-  };   
+    setUsers(usersData.filter((el) => el._id !== event.target.id));
+  };
 
   return (
     <>
-      <>{Header(use)}</>
-      <br />
-      <table className="table">
-        <TableHead />
-        <tbody>{use.map((user) => User(user, handleDelete))}</tbody>
-      </table>
+      {!usersData || usersData.length === 0 ? (
+        <h1 className="badge bg-danger fs-4">
+          Никто не тусанет с тобой сегодня
+        </h1>
+      ) : (
+        <>
+          <>{Header(usersData)}</>
+          <br />
+          <table className="table">
+            <TableHead />
+            <tbody>{usersData.map((user) => User(user, handleDelete))}</tbody>
+          </table>
+        </>
+      )}
     </>
   );
 };

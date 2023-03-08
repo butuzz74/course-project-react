@@ -15,4 +15,4 @@ const TableHead = () => {
   );
 };
 
-export default TableHead
+export default TableHead;
